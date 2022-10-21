@@ -64,6 +64,11 @@ class Produit
      */
     private $categories;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $stock;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -157,6 +162,18 @@ class Produit
         if ($this->categories->removeElement($category)) {
             $category->removeProduit($this);
         }
+
+        return $this;
+    }
+
+    public function isStock(): ?bool
+    {
+        return $this->stock;
+    }
+
+    public function setStock(bool $stock): self
+    {
+        $this->stock = $stock;
 
         return $this;
     }

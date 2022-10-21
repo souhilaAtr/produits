@@ -20,8 +20,9 @@ class ProduitFixtures extends Fixture
             $produit->setNom($faker->word())
                 ->setPrix($faker->randomNumber($nbDigits=null,$strict=false))
                 ->setCreatedAt(new \DateTimeImmutable())
-                ->setDescription($faker->paragraph($nbSentences = 1, $variableNbSentences = true));
-            $manager->persist($produit);
+                ->setDescription($faker->paragraph($nbSentences = 1, $variableNbSentences = true))
+                ->setStock($faker->boolean($chanceOfGettingTrue = 50));
+                $manager->persist($produit);
 
             for($j=0;$j<5;$j++){
                 $category = new Category();
