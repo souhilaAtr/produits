@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Produit;
 use App\Form\ProduitType;
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,13 +62,13 @@ class ProduitsController extends AbstractController
             $produit->setCreatedAt(new \DateTimeImmutable());
             $om->persist($produit);
             $om->flush();
-            return $this->redirectToRoute('showone', ["id"=>$produit->getId()]);
+            return $this->redirectToRoute('showone', ["id" => $produit->getId()]);
         }
         $mode = false;
         if ($produit->getId() !== null) {
             $mode = true;
         }
-       
+
         return $this->render("produits/createone.html.twig", [
             "formulaire" => $formulaire->createView(),
             "mode" => $mode
@@ -76,10 +78,30 @@ class ProduitsController extends AbstractController
     /**
      * @Route("/supprimerproduit/{id}", name="supprimerproduit")
      */
-    public function suppressionProduit(Produit $produit){
-            $om = $this->getDoctrine()->getManager();
-            $om->remove($produit);
-            $om->flush();
-            return $this->redirectToRoute('showall');
+    public function suppressionProduit(Produit $produit)
+    {
+        $om = $this->getDoctrine()->getManager();
+        $om->remove($produit);
+        $om->flush();
+        return $this->redirectToRoute('showall');
+    }
+
+    /**
+     * @Route("/produitbycat/{id}", name="produitbycat")
+     */
+    public function produitbycat(ManagerRegistry $doctrine, $id, Category $category)
+    {
+        $objecgtManager = $doctrine->getRepository(Category::class);
+        $produits = $objecgtManager->findProduitsByCategory($id);
+        // $category = new Category();
+        // dd($produits[0]["id"]);
+        // $idcat = $produits[0]["id"];
+        // $cat = $objecgtManager->find($idcat);
+        // dd($cat->getNom());
+        return $this->render('produits/produitebycat.html.twig', [
+            "produits" => $produits,
+            "category" => $category
+            // "nomCat" =>$cat->getNom()
+        ]);
     }
 }
