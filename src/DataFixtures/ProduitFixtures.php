@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-
+use App\Entity\Category;
 use App\Entity\Produit;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -22,6 +22,15 @@ class ProduitFixtures extends Fixture
                 ->setCreatedAt(new \DateTimeImmutable())
                 ->setDescription($faker->paragraph($nbSentences = 1, $variableNbSentences = true));
             $manager->persist($produit);
+
+            for($j=0;$j<5;$j++){
+                $category = new Category();
+                $category->setNom($faker->safeColorName)
+->setDescription($faker->paragraph($nbSentences = 1, $variableNbSentences = true));
+
+                    $category->addProduit($produit);
+                $manager->persist($category);
+                    }
         }
         $manager->flush();
     }
