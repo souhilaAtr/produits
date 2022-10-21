@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+{{form_start(formulaire)}}
+{{form_widget(formulaire)}}
+
+
+
+
+{% if mode %}
+
+<button type="submit" class="btn btn-danger">modifier un produit</button>
+{% else %}
+<button type="submit" class="btn btn-light">ajouter un produit</button>
+{% endif %}
+{{form_end(formulaire)}}
+{% endblock body %}

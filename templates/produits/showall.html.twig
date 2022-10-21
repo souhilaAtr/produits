@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+<div class="cardsz">
+    {% for produit in products %}
+    <div class="card text-white bg-warning mb-3" style="max-width: 30rem;">
+        <div class="card-header">Informations Produit</div>
+        <div class="card-body">
+            <h4 class="card-title">{{produit.nom}}</h4>
+            <h4 class="card-title">{{produit.prix}}</h4>
+            <img src="https://picsum.photos/400/300" alt="">
+            <p class="card-text">{{produit.description}}</p>
+            <h5 class="card-title">{{produit.createdAt|date("m/d/Y")}}</h5>
+        </div>
+        <a href="{{path('showone',{'id':produit.id})}}"><button type="button" class="btn btn-success">Lire Plus</button></a>
+
+        <a href="{{path('editproduct',{'id':produit.id})}}"><button type="button" class="btn btn-danger">modifier un produit </button></a>
+
+        <a href="{{path('supprimerproduit',{'id':produit.id})}}"><button type="button" class="btn btn-warning">supprimer un produit</button></a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock body %}

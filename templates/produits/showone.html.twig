@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="card border-primary mb-3" style="max-width: 20rem;">
+    <div class="card-header">Informations Produit</div>
+    <div class="card-body">
+        <h4 class="card-title">{{produit.nom}}</h4>
+        <h6 class="card-title">{{produit.prix}}</h6>
+        <p class="card-text">{{produit.description}}</p>
+    </div>
+</div>
+{% endblock body %}

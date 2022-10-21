@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+{{form_start(formulaire)}}
+<div class="form-control">
+    <div class="form-group">
+        <label for=""></label>
+        {{form_row(formulaire.nom, {"label":"","attr":{"placeholder":"Votre nom", "class":"champ"}})}}
+    </div>
+    <div class="form-group">
+        {{form_row(formulaire.prenom, {"label":"mon prenom","attr":{"placeholder":"votre prenom", "class":"champ"}})}}
+    </div>
+    <div class="form-group">
+
+        {{form_row(formulaire.sexe, {"label":"Genre","attr":{ "class":"champ"}})}}
+
+
+    </div>
+    <div class="form-group">
+        {{form_row(formulaire.age, {"label":"Age: ","attr":{ "class":"champ"}})}}
+
+    </div>
+    <div class="form-group">
+        {{form_row(formulaire.email, {"label":"email: ","attr":{ "class":"champ"}})}}
+
+    </div>
+    <div class="form-group">
+        {{form_row(formulaire.password, {"label":"mot de passe: ","attr":{ "class":"champ"}})}}
+
+    </div>
+    <div class="form-group">
+        {{form_row(formulaire.image, {"attr":{ "class":"champ"}})}}
+
+    </div>
+    
+</div>
+
+<button type="submit" class="btn btn-success">Ajouter un employe</button>
+{{form_end(formulaire)}}
+{% endblock %}

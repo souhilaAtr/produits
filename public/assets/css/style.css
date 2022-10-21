@@ -1,0 +1,9 @@
+body{
+    background-image: url("../image/produit.jpg");
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+.cardsz{    
+       margin:20px 25%;
+}
